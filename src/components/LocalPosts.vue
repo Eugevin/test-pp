@@ -45,17 +45,6 @@ function dragStart($event: DragEvent, id: string) {
 </template>
 
 <style lang="scss">
-// * FOR ANIMATION NEEDS
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
 .local-posts {
   padding: 1rem;
   display: flex;

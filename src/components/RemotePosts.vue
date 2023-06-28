@@ -75,11 +75,14 @@ function dragStart($event: DragEvent, id: string) {
     <input v-model="inputValue" @input="searchPosts" class="remote-posts__search" type="text"
       placeholder="Search by name...">
     <div class="remote-posts__view">
-      <div class="remote-post" draggable="true" @dragstart="dragStart($event, String(post.id))" v-for="post in store.postsRemote" :key="post.id">
-        <div class="remote-post__id">UserID: {{ post.userId }}</div>
-        <div class="remote-post__title">{{ post.title }}</div>
-        <div class="remote-post__body">{{ post.body }}</div>
-      </div>
+      <TransitionGroup name="list">
+        <div class="remote-post" draggable="true" @dragstart="dragStart($event, String(post.id))"
+          v-for="post in store.postsRemote" :key="post.id">
+          <div class="remote-post__id">UserID: {{ post.userId }}</div>
+          <div class="remote-post__title">{{ post.title }}</div>
+          <div class="remote-post__body">{{ post.body }}</div>
+        </div>
+      </TransitionGroup>
     </div>
     <Pagination @change="slickToBottom" />
   </div>
@@ -89,6 +92,7 @@ function dragStart($event: DragEvent, id: string) {
 .remote-posts {
   height: 100vh;
   overflow-y: scroll;
+  overflow-x: hidden;
   padding: 1rem;
   background: #eeeeee;
 
