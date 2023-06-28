@@ -25,6 +25,10 @@ function dragStart($event: DragEvent, id: string) {
     $event.dataTransfer.setData('elIDInside', id);
   }
 }
+
+function dragEnd() {
+  store.dragging = false;
+}
 </script>
 
 <template>
@@ -33,7 +37,7 @@ function dragStart($event: DragEvent, id: string) {
     <div :class="`local-posts__view ${store.dragging ? 'local-posts__view_dragging' : ''}`" ref="viewEl" @drop.stop="drop"
       @dragover.prevent @dragenter.prevent>
       <TransitionGroup name="list">
-        <div class="local-post" @dragstart="dragStart($event, String(post.id))" draggable="true" v-for="post in store.postsLocal" :data-id="post.id" :key="post.id">
+        <div class="local-post" @dragstart="dragStart($event, String(post.id))" @dragend="dragEnd" draggable="true" v-for="post in store.postsLocal" :data-id="post.id" :key="post.id">
           <div class="local-post__remove" @click="store.removePostsLocal(post.id)">Remove item</div>
           <div class="local-post__id">UserID: {{ post.userId }}</div>
           <div class="local-post__title">{{ post.title }}</div>

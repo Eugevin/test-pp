@@ -67,6 +67,10 @@ function dragStart($event: DragEvent, id: string) {
     $event.dataTransfer.setData('elID', id)
   }
 }
+
+function dragEnd() {
+  store.dragging = false;
+}
 </script>
 
 <template>
@@ -76,7 +80,7 @@ function dragStart($event: DragEvent, id: string) {
       placeholder="Search by name...">
     <div class="remote-posts__view">
       <TransitionGroup name="list">
-        <div class="remote-post" draggable="true" @dragstart="dragStart($event, String(post.id))"
+        <div class="remote-post" draggable="true" @dragstart="dragStart($event, String(post.id))" @dragend="dragEnd"
           v-for="post in store.postsRemote" :key="post.id">
           <div class="remote-post__id">UserID: {{ post.userId }}</div>
           <div class="remote-post__title">{{ post.title }}</div>
