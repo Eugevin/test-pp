@@ -11,7 +11,7 @@ function drop(e: any) {
     store.addPostsLocal(+e.dataTransfer.getData('elID'));
   }
 
-  if (e.dataTransfer && e.dataTransfer.getData('elIDInside')) {
+  if (e.dataTransfer && e.dataTransfer.getData('elIDInside') && e.toElement.dataset.id) {
     store.movePostsLocal(+e.dataTransfer.getData('elIDInside'), +e.toElement.dataset.id);
   }
 }
